@@ -77,6 +77,11 @@ def visit(observation, **kwargs):
     count = 0
     changed = False
 
+    if observation.instrument.name in ['ESPaDOnS', 'MegaPrime', 'SITELLE', 'SPIRou', 'WIRCam']:
+        logging.info(f'Skipping {observation.observation_id} '
+                     f'with name {observation.instrument.name}')
+        raise mc.CadcException(f'I know I want to skip {observation.observation_id}')
+
     for plane in observation.planes.values():
         for artifact in plane.artifacts.values():
             if '.sdf' in artifact.uri:
@@ -93,12 +98,12 @@ def visit(observation, **kwargs):
                             chunk.position_axis_2 = None
                             changed = True
                     else:
+                        n_axis_count = 2
                         if (chunk.position_axis_1 is None or
                                 chunk.position_axis_2 is None):
                             chunk.position_axis_1 = 1
                             chunk.position_axis_2 = 2
                             changed = True
-                            n_axis_count = 2
 
                     if chunk.energy is None:
                         if chunk.energy_axis is not None:
