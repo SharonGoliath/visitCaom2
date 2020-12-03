@@ -10,7 +10,6 @@ RUN pip install cadcdata \
     caom2 \
     caom2repo \
     caom2utils \
-    deprecated \
     ftputil \
     importlib-metadata \
     pytz \
@@ -20,7 +19,7 @@ RUN pip install cadcdata \
 
 WORKDIR /usr/src/app
 
-ARG OMC_REPO=opencadc-metadata-curation
+ARG OMC_REPO=opencadc
 
 RUN git clone https://github.com/${OMC_REPO}/caom2pipe.git && \
   pip install ./caom2pipe
