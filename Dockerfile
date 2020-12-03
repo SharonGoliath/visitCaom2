@@ -19,12 +19,12 @@ RUN pip install cadcdata \
 
 WORKDIR /usr/src/app
 
-ARG OMC_REPO=opencadc
+ARG OPENCADC_REPO=opencadc
 
-RUN git clone https://github.com/${OMC_REPO}/caom2pipe.git && \
+RUN git clone https://github.com/${OPENCADC_REPO}/caom2pipe.git && \
   pip install ./caom2pipe
   
-RUN git clone https://github.com/${OMC_REPO}/visitCaom2.git && \
+RUN git clone https://github.com/${OPENCADC_REPO}/visitCaom2.git && \
   cp ./visitCaom2/scripts/config.yml / && \
   cp ./visitCaom2/scripts/docker-entrypoint.sh / && \
   pip install ./visitCaom2
