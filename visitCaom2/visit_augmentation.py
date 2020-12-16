@@ -78,9 +78,8 @@ def visit(observation, **kwargs):
     changed = False
 
     if observation.instrument.name in ['ESPaDOnS', 'MegaPrime', 'SITELLE', 'SPIRou', 'WIRCam']:
-        logging.info(f'Skipping {observation.observation_id} '
-                     f'with name {observation.instrument.name}')
-        raise mc.CadcException(f'I know I want to skip {observation.observation_id}')
+        logging.warning(f'{observation.observation_id} is for '
+                        f'{observation.instrument.name}')
 
     for plane in observation.planes.values():
         for artifact in plane.artifacts.values():
